@@ -1,0 +1,36 @@
+﻿@model List<ForgetTheMilk.Controllers.Task>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+   <p>Add a task:</p>
+    <form action="@Url.Action("Add")" method="post">
+        <input type="text" class="input-lg col-xs-12" name="task" autofocus />
+    </form>
+</div>
+
+<h3>@Model.Count() Task(s)</h3>
+<table class="table">
+    <tr>
+        <th>Description</th>
+        <th>Due Date</th>
+        <th>Link</th>
+    </tr>
+    <tbody>
+        @foreach (var task in Model)
+        {
+        <tr>
+            <td>
+                @task.Description
+            </td>
+            <td>
+                @(task.DueDate.HasValue ? @task.DueDate.Value.ToShortDateString() : "")
+            </td>
+            <td>
+                <a href="@task.Link">@task.Link</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
